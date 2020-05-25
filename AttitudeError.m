@@ -1,4 +1,4 @@
-function [beta_BR,wB_BR] = AttitudeError(t, RN, wN_RN)
+function [beta_BR,wB_BR] = AttitudeError(t, sigma_BN, wB_BN, RN, wN_RN)
 % gives error in quaterinons and angular velocity
 % between body frame and reference frame
 % for all 3 science mode of the spacecraft
@@ -21,13 +21,10 @@ function [beta_BR,wB_BR] = AttitudeError(t, RN, wN_RN)
 % calculate wN_BR = (BN')*wB_BN - wN_RN
 % calculate wB_BR = BN*wN_BR
 
-BN = HN_t(t);
-%beta_BN = dcm2quat(BN);
-theta_dot = 0.000884797;  % rad/sec % for nano sat
-wB_BN = (BN)*[0; 0; theta_dot]; % const
+BN = mrp2dcm(sigma_BN);
 
-BR = BN*RN';
-beta_BR = dcm2quat(BR);
+RB = RN*(BN');
+beta_BR = dcm2mrp(RB');
 wN_BR = (BN')*wB_BN - wN_RN;
 wB_BR = BN*wN_BR;
 end
