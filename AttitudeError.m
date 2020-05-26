@@ -16,7 +16,7 @@ function [beta_BR,wB_BR] = AttitudeError(t, sigma_BN, wB_BN, RN, wN_RN)
 BN = mrp2dcm(sigma_BN);
 
 RB = RN*(BN');
-beta_BR = dcm2mrp(RB');
+beta_BR = dcm2mrp(RB')';
 wN_BR = (BN')*wB_BN - wN_RN;
 wB_BR = BN*wN_BR;
 end
