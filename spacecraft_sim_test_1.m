@@ -13,7 +13,7 @@ x_data = [];
 j = 1; % for data collection indexing
 xstar = x0;           % Initial condition gives solution at t=0.
 for i=t
-    xstar = RK4("MAVERICK", xstar, u, i, h);
+    xstar = RK4("MAVERICK", xstar, u, i, dt);
     x_data(1,j) = xstar(1,1);
     x_data(2,j) = xstar(2,1);
     x_data(3,j) = xstar(3,1);
